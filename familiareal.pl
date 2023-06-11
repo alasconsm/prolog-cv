@@ -36,7 +36,6 @@ parent('Peter Phillips','Savannah Phillips').
 parent('Autumn Kelly', 'Savannah Phillips').
 parent('Peter Phillips','Isla Phillips').
 parent('Autumn Kelly', 'Isla Phillips').
-
 parent('Príncipe Andrés', 'Princesa Beatriz').
 parent('Duquesa Sarah', 'Princesa Beatriz').
 parent('Príncipe Andrés', 'Princesa Eugenia').
@@ -81,8 +80,14 @@ male('Duque Harry').
 mother(X,Y):- parent(X,Y),female(X).
 father(X,Y):- parent(X,Y),male(X).
 
-father_report:-     
-write('Known fathers are:'),nl,   
-father(X),   
-write(X),nl,   
-fail.
+father_report:-
+  write('Known fathers are:'),nl, 
+  father(X,_),
+  write(X),nl,
+  fail.
+
+mother_report:-
+  write('Known mothers are:'),nl, 
+  mother(X,_),
+  write(X),nl,
+  fail.
