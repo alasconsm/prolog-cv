@@ -1,6 +1,6 @@
 /* Padres*/
 
-parent('Isabel II','Rey Carlos III').
+parent('isabel ii','Rey Carlos III').
 parent('Felipe','Rey Carlos III').
 parent('Isabel II','Princesa Ana').
 parent('Felipe','Princesa Ana').
@@ -87,7 +87,7 @@ father_report:-
   fail.
 
 mother_report:-
-  write('Known mothers are:'),nl, 
-  mother(X,_),
-  write(X),nl,
+  write('Known mothers are:'), 
+  mother(X,Y),
+  write(X), write(Y),nl,
   fail.
