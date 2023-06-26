@@ -1,5 +1,34 @@
-/* Padres*/
+/*Mujeres*/
+female('Lady Louise').
+female('Princesa Beatriz').
+female('Princesa Eugenia').
+female('Savannah Phillips').
+female('Isla Phillips').
+female('Mia Tindall').
+female('Lena Tindall').
+female('Zara Phillips').
+female('Princesa Lilibet').
+female('Princesa Carlota').
+female('Isabel II').
+female('Princesa Ana').
+female('Condesa Sofia').
 
+/*Hombres*/
+male('Rey Carlos III').
+male('Felipe').
+male('Principe Andres').
+male('Principe Eduardo').
+male('Principe Jorge').
+male('Principe Luis').
+male('Principe Archie').
+male('Peter Phillips').
+male('Lucas Tindall').
+male('Vizconde James').
+male('August Philip').
+male('Principe William').
+male('Duque Harry').
+
+/* Padres*/
 parent('Isabel II','Rey Carlos III').
 parent('Felipe','Rey Carlos III').
 parent('Isabel II','Princesa Ana').
@@ -50,48 +79,32 @@ parent('Principe Eduardo','Vizconde James').
 parent('Condesa Sofia','Vizconde James').
 
 
-female('Lady Louise').
-female('Princesa Beatriz').
-female('Princesa Eugenia').
-female('Savannah Phillips').
-female('Isla Phillips').
-female('Mia Tindall').
-female('Lena Tindall').
-female('Zara Phillips').
-female('Princesa Lilibet').
-female('Princesa Carlota').
-female('Isabel II').
-female('Princesa Ana').
-male('Rey Carlos III').
-male('Felipe').
-male('Principe Andres').
-male('Principe Eduardo').
-male('Principe Jorge').
-male('Principe Luis').
-male('Principe Archie').
-male('Peter Phillips').
-male('Lucas Tindall').
-male('Vizconde James').
-male('August Philip').
-male('Principe William').
-male('Duque Harry').
+/*Funciones*/
+/*Quien es la mama o papa de Y*/
+/*Quien es el hijo hija de X*/
+mother(X,Y):- parent(X,Y), female(X).  
+father(X,Y):- parent(X,Y), male(X).
+/*Quienes son los nietos de X?*/
+/*Quienes son los abuerlo de Z?*/
+grandparent(X,Z):-  parent(X,Y),  parent(Y,Z).
+/*/*Quienes son los nietos de X?*/
+/*Quienes son los abuerlo de Z?*/
+grandmother(X,Z):-mother(X,Y),parent(Y,Z).
+grandfather(X,Z):-father(X,Y),parent(Y,Z).
+/*X tiene hijos?*/
+haschild(X):- parent(X,_).
+/*Quien es la hermana hermano de Y*/
+/*De quien es hermana hermano X*/
+sister(X,Y):- parent(Z,X),parent(Z,Y),female(X),X\==Y.
+brother(X,Y):-parent(Z,X),parent(Z,Y),male(X),X\==Y.
+/**/
+wife(X,Y):-parent(X,Z),parent(Y,Z),female(X),male(Y).
+uncle(X,Z):-brother(X,Y),parent(Y,Z).
 
+predecessor(X, Z) :- parent(X, Z).
+predecessor(X, Z) :- parent(X, Y),predecessor(Y, Z).
 
-mother(X,Y):- 
-  parent(X,Y),
-  female(X).
-
-father(X,Y):- 
-  parent(X,Y),
-  male(X).
-
-grandparent(X,Z):-
-  parent(X,Y),
-  parent(Y,Z).
-
-grandchild(X,Z):-
-  grandparent(Z,X).
-
+/*Reportes*/
 father_report:-
   write('Known fathers are:'),nl, 
   father(X,Y),
