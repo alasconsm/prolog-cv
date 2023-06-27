@@ -1,28 +1,40 @@
 /*Comida*/
 /*food(english_food).*/
-food([fish_and_chips, roast_beef, full_english_breakfast, shepherds_pie, yorkshire_pudding, bangers_and_mash, black_pudding, ploughmans_lunch, chicken_tikka_masala, waffles]).
+food(['fish_and_chips', 'roast_beef', 'full_english_breakfast', 'shepherds_pie', 'yorkshire_pudding', 'bangers_and_mash', 'black_pudding','ploughmans_lunch', 'chicken_tikka_masala', 'waffles']).
 
 /*sports*/
 /*sports(sports_list).*/
-sports([football, cricket, tennis, rugby, golf, basketball, swimming, horse_riding, boxing, volleyball, ballet]).
+sports(['football', 'cricket', 'tennis', 'rugby', 'golf', 'basketball', 'swimming', 'horse_riding', 'boxing', 'volleyball', 'ballet']).
 
 /*pets*/
 /*pets(pets_list).*/
-pets([dog, cat, rabbit, horse,fish]).
+pets(['dog', 'cat', 'rabbit', 'horse','fish']).
 
 /*ciudades*/
 landmarks(['Buckingham Palace','Castillo de Praga', 'Sforezco Castle', 'Luxembourg Palace' ,'Kasteel van Beersel', 'Castel Sant-Angelo',  'Monaco Grand Prix', 'Zamel Wawel', 'Piazza de Ferrari' ]).
-cities([Londres, Praga, Milan, Paris, Bruselas, Roma, Montecarlo, Cracovia, Genovia ]).
-country([Inglaterra, Republica_Checa, Italia, Francia, Belgica, Monaco, Polonia]).
+cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 'Cracovia','Genovia']).
+country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).
 
 /* Clasificar ciudades en ciudades, provincias y países */
-landmark_from('Buckingham Palace', Londres).
-city_from(Londres, Inglaterra).
+landmark_from('Buckingham Palace', 'Londres').
+landmark_from('Castillo de Praga','Praga').
+landmark_from('Sforezco Castle','Milan').
+landmark_from('Luxembourg Palace','Paris').
+landmark_from('Kasteel van Beersel','Bruselas').
+landmark_from('Castel Sant-Angelo','Roma').
+landmark_from('Monaco Grand Prix','Montecarlo').
+landmark_from('Zamel Wawel','Cracovia').
+landmark_from('Piazza de Ferrari','Genovia').
 
-landmark_from('Castillo de Praga',Praga).
-city_from(Praga, Republica_Checa).
-
-
+city_from('Londres','Inglaterra').
+city_from('Praga', 'Republica_Checa').
+city_from('Milan', 'Italia').
+city_from('Paris', 'Francia').
+city_from('Bruselas', 'Belgica').
+city_from('Roma', 'Italia').
+city_from('Montecarlo','Monaco').
+city_from('Cracovia', 'Polonia').
+city_from('Genovia', 'Italia').
 
 
 /*Mujeres*/
@@ -40,7 +52,7 @@ female('Isabel II').
 female('Princesa Ana').
 female('Condesa Sofia').
 female('Duquesa Sarah').
-female ('Camila').
+female('Camila').
 
 /*Hombres*/
 male('Rey Carlos III').
@@ -446,3 +458,58 @@ has_pet('Principe William', cat).
 
 has_pet('Duque Harry', dog).
 has_pet('Duque Harry', rabbit).
+
+
+/**************VIVIENDA********************/
+
+# landmarks(['Buckingham Palace','Castillo de Praga', 'Sforezco Castle', 'Luxembourg Palace' ,'Kasteel van Beersel', 'Castel Sant-Angelo',  'Monaco Grand Prix', 'Zamel Wawel', 'Piazza de Ferrari' ]).
+# cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 'Cracovia','Genovia']).
+# country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).
+
+
+live_at('Rey Carlos III','Buckingham Palace').
+live_at('Camila','Buckingham Palace').
+
+live_at('Principe Eduardo','').
+live_at('Condesa Sofia','').
+live_at('Lady Louise','').
+live_at('Vizconde James','').
+
+live_at('Princesa Eugenia','').
+live_at('August Philip','').
+live_at('Jack Brooksbank','').
+
+live_at('Princesa Beatriz','').
+live_at('Sienna Elizabeth','').
+live_at('Edoardo Mapelli','').
+
+live_at('Principe Andres','').
+
+live_at('Duquesa Sarah','').
+
+live_at('Timothy Laurence','').
+live_at('Princesa Ana','').
+
+live_at('Mark Phillips','').
+
+live_at('Zara Phillips','').
+live_at('Mike Tindall','').
+live_at('Mia Tindall','').
+live_at('Lena Tindall','').
+live_at('Lucas Tindall','').
+
+live_at('Peter Phillips','').
+live_at('Autumn Kelly','').
+live_at('Isla Phillips','').
+live_at('Savannah Phillips','').
+
+live_at('Duque Harry','').
+live_at('Principe Archie','').
+live_at('Duquesa Meghan','').
+live_at('Princesa Lilibet','').
+
+live_at('Principe William','').
+live_at('Duquesa Catalina','').
+live_at('Principe Luis','').
+live_at('Princesa Carlota','').
+live_at('Principe Jorge','').
