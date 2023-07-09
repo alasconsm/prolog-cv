@@ -15,28 +15,6 @@ landmarks(['Buckingham Palace','Castillo de Praga', 'Sforezco Castle', 'Luxembou
 cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 'Cracovia','Genovia']).
 country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).
 
-/* Clasificar ciudades en ciudades, provincias y países */
-landmark_from('Buckingham Palace', 'Londres').
-landmark_from('Castillo de Praga','Praga').
-landmark_from('Sforezco Castle','Milan').
-landmark_from('Luxembourg Palace','Paris').
-landmark_from('Kasteel van Beersel','Bruselas').
-landmark_from('Castel Sant-Angelo','Roma').
-landmark_from('Monaco Grand Prix','Montecarlo').
-landmark_from('Zamel Wawel','Cracovia').
-landmark_from('Piazza de Ferrari','Genovia').
-
-city_from('Londres','Inglaterra').
-city_from('Praga', 'Republica_Checa').
-city_from('Milan', 'Italia').
-city_from('Paris', 'Francia').
-city_from('Bruselas', 'Belgica').
-city_from('Roma', 'Italia').
-city_from('Montecarlo','Monaco').
-city_from('Cracovia', 'Polonia').
-city_from('Genovia', 'Italia').
-
-
 /*Mujeres*/
 female('Lady Louise').
 female('Princesa Beatriz').
@@ -462,54 +440,109 @@ has_pet('Duque Harry', rabbit).
 
 /**************VIVIENDA********************/
 
-# landmarks(['Buckingham Palace','Castillo de Praga', 'Sforezco Castle', 'Luxembourg Palace' ,'Kasteel van Beersel', 'Castel Sant-Angelo',  'Monaco Grand Prix', 'Zamel Wawel', 'Piazza de Ferrari' ]).
-# cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 'Cracovia','Genovia']).
-# country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).
+/*landmarks(['Buckingham Palace','Castillo de Praga', 'Sforezco Castle', 'Luxembourg Palace' ,'Kasteel van Beersel', 'Castel Sant-Angelo',  'Monaco Grand Prix', 'Zamel Wawel', 'Piazza de Ferrari' ]).
+cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 'Cracovia','Genovia']).
+country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).*/
 
 
 live_at('Rey Carlos III','Buckingham Palace').
 live_at('Camila','Buckingham Palace').
 
-live_at('Principe Eduardo','').
-live_at('Condesa Sofia','').
-live_at('Lady Louise','').
-live_at('Vizconde James','').
+live_at('Principe Eduardo','Castillo de Praga').
+live_at('Condesa Sofia','Castillo de Praga').
+live_at('Lady Louise','Castillo de Praga').
+live_at('Vizconde James','Castillo de Praga').
 
-live_at('Princesa Eugenia','').
-live_at('August Philip','').
-live_at('Jack Brooksbank','').
+live_at('Princesa Eugenia','Sforezco Castle').
+live_at('August Philip','Sforezco Castle').
+live_at('Jack Brooksbank','Sforezco Castle').
 
-live_at('Princesa Beatriz','').
-live_at('Sienna Elizabeth','').
-live_at('Edoardo Mapelli','').
+live_at('Princesa Beatriz','Luxembourg Palace').
+live_at('Sienna Elizabeth','Luxembourg Palace').
+live_at('Edoardo Mapelli','Luxembourg Palace').
 
-live_at('Principe Andres','').
+live_at('Principe Andres','Monaco Grand Prix').
 
-live_at('Duquesa Sarah','').
+live_at('Duquesa Sarah','Luxembourg Palace').
 
-live_at('Timothy Laurence','').
-live_at('Princesa Ana','').
+live_at('Timothy Laurence','Piazza de Ferrari').
+live_at('Princesa Ana','Piazza de Ferrari').
 
-live_at('Mark Phillips','').
+live_at('Mark Phillips','Castel Sant-Angelo').
 
-live_at('Zara Phillips','').
-live_at('Mike Tindall','').
-live_at('Mia Tindall','').
-live_at('Lena Tindall','').
-live_at('Lucas Tindall','').
+live_at('Zara Phillips','Kasteel van Beersel').
+live_at('Mike Tindall','Kasteel van Beersel').
+live_at('Mia Tindall','Kasteel van Beersel').
+live_at('Lena Tindall','Kasteel van Beersel').
+live_at('Lucas Tindall','Kasteel van Beersel').
 
-live_at('Peter Phillips','').
-live_at('Autumn Kelly','').
-live_at('Isla Phillips','').
-live_at('Savannah Phillips','').
+live_at('Peter Phillips','Castel Sant-Angelo').
+live_at('Autumn Kelly','Castel Sant-Angelo').
+live_at('Isla Phillips','Castel Sant-Angelo').
+live_at('Savannah Phillips','Castel Sant-Angelo').
 
-live_at('Duque Harry','').
-live_at('Principe Archie','').
-live_at('Duquesa Meghan','').
-live_at('Princesa Lilibet','').
+live_at('Duque Harry','Zamel Wawel').
+live_at('Principe Archie','Zamel Wawel').
+live_at('Duquesa Meghan','Zamel Wawel').
+live_at('Princesa Lilibet','Zamel Wawel').
 
-live_at('Principe William','').
-live_at('Duquesa Catalina','').
-live_at('Principe Luis','').
-live_at('Princesa Carlota','').
-live_at('Principe Jorge','').
+live_at('Principe William','Buckingham Palace').
+live_at('Duquesa Catalina','Buckingham Palace').
+live_at('Principe Luis','Buckingham Palace').
+live_at('Princesa Carlota','Buckingham Palace').
+live_at('Principe Jorge','Buckingham Palace').
+
+
+/* Clasificar ciudades en ciudades, provincias y países */
+landmark_from('Buckingham Palace', 'Londres').
+landmark_from('Castillo de Praga','Praga').
+landmark_from('Sforezco Castle','Milan').
+landmark_from('Luxembourg Palace','Paris').
+landmark_from('Kasteel van Beersel','Bruselas').
+landmark_from('Castel Sant-Angelo','Roma').
+landmark_from('Monaco Grand Prix','Montecarlo').
+landmark_from('Zamel Wawel','Cracovia').
+landmark_from('Piazza de Ferrari','Genovia').
+
+city_from('Londres','Inglaterra').
+city_from('Praga', 'Republica_Checa').
+city_from('Milan', 'Italia').
+city_from('Paris', 'Francia').
+city_from('Bruselas', 'Belgica').
+city_from('Roma', 'Italia').
+city_from('Montecarlo','Monaco').
+city_from('Cracovia', 'Polonia').
+city_from('Genovia', 'Italia').
+
+/* Quiénes viven en qué ciudad? */
+residents_in_city(City, People) :-
+    landmark_from(Landmark, City),
+    live_at(People, Landmark).
+
+/* Quiénes viven en qué país? */
+residents_in_country(Country, People) :-
+    city_from(City, Country),
+    residents_in_city(City, People).
+
+
+/*¿Quiénes que viven en X país, les gusta Y deporte?*/
+who_sport(Country,Lsport,People) :-
+    residents_in_country(Country, People),
+    likes_sport(People,Lsport).
+
+
+/*¿Quiénes que viven en X país, les gusta Y comida?*/
+who_food(Country,Lfood,People) :-
+    residents_in_country(Country, People),
+    likes_food(People,Lfood).
+
+/*¿Quiénes que viven en X país, tienen Y mascota?*/
+who_pet(Country,Hpet,People) :-
+    residents_in_country(Country, People),
+    has_pet(People,Hpet).
+
+
+/*¿A qué abuelo de X, le gusta Y comida?*/
+who_gparent(Person,Lfood,Grandparent) :-
+    grandparent(Grandparent,Person),
+    likes_food(Person,Lfood).  
