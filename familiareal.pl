@@ -524,12 +524,10 @@ residents_in_country(Country, People) :-
     city_from(City, Country),
     residents_in_city(City, People).
 
-
 /*¿Quiénes que viven en X país, les gusta Y deporte?*/
 who_sport(Country,Lsport,People) :-
     residents_in_country(Country, People),
     likes_sport(People,Lsport).
-
 
 /*¿Quiénes que viven en X país, les gusta Y comida?*/
 who_food(Country,Lfood,People) :-
@@ -541,8 +539,18 @@ who_pet(Country,Hpet,People) :-
     residents_in_country(Country, People),
     has_pet(People,Hpet).
 
-
 /*¿A qué abuelo de X, le gusta Y comida?*/
 who_gparent(Person,Lfood,Grandparent) :-
     grandparent(Grandparent,Person),
     likes_food(Person,Lfood).  
+  
+/*¿Qué abuelo de X, vive en qué ciudad?*/
+who_gparent_liveat(Person,Lcity,Grandparent) :-
+    grandparent(Grandparent,Person),
+    residents_in_city(City,Person).
+
+/*¿Quiénes que tienen X mascotas, les gusta Y comida?*/
+who_petowner_likesfood(Country,Hpet,People) :-
+    likes_food(People,food),
+    has_pet(People,Hpet).
+
