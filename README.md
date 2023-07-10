@@ -65,10 +65,16 @@ residents_in_city(X, Y).
 who_sport(Country,Lsport,People).
 
 #### 16.¿Quiénes que viven en X país, les gusta Y comida?
-who_food(Country,Lfood,People)
+who_food(Country,Lfood,People).
 
 #### 17.¿Quiénes que viven en X país, tienen Y mascota?
-who_pet(Country,Hpet,People)
+who_pet(Country,Hpet,People).
 
 #### 18.¿A qué abuelo/a de X, le gusta Y comida?
-who_gparent(Person,Lfood,Grandparent)
+who_gparent(Person,Lfood,Grandparent).
+
+#### 19.¿Qué abuelo de X, vive en qué ciudad?
+who_gparent_liveat(Person,Lcity,Grandparent).
+
+#### 20¿Quiénes que tienen X mascotas, les gusta Y comida?
+who_petowner_likesfood(Food,Hpet,People).

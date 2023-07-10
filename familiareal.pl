@@ -546,11 +546,12 @@ who_gparent(Person,Lfood,Grandparent) :-
   
 /*¿Qué abuelo de X, vive en qué ciudad?*/
 who_gparent_liveat(Person,Lcity,Grandparent) :-
-    grandparent(Grandparent,Person),
-    residents_in_city(City,Person).
+    residents_in_city(Lcity,Person),
+    grandparent(Grandparent,Person).
+    
 
 /*¿Quiénes que tienen X mascotas, les gusta Y comida?*/
-who_petowner_likesfood(Country,Hpet,People) :-
-    likes_food(People,food),
+who_petowner_likesfood(Food,Hpet,People) :-
+    likes_food(People,Food),
     has_pet(People,Hpet).
 
