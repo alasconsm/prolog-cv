@@ -98,8 +98,9 @@ comando([Relacion,Persona]) --> pregunta, es, relacion(Relacion), de, nombre(Per
 comando([Gusto]) --> que, deportes, art, gustan, a, nombre(Persona).
 comando([Gusto]) --> que, comidas, art, gustan, a, nombre(Persona).
 comando([Relacion,Persona])--> que, mascota, tener, nombre(Persona).
-comando()--> pregunta, viven, en, nombre(Ciudad)
-comando()--> pregunta, viven, en, nombre(Pais)
+comando()--> pregunta, viven, en, nombre(Ciudad).
+comando()--> pregunta, viven, en, nombre(Pais).
+
 
 %comando([Relacion, Persona]) --> pregunta, son, art, pariente, vivir(Relacion), que, tener, nombre(Persona).
 
@@ -158,7 +159,7 @@ relacion(salir) --> [salir].
 
 gustos(Tipo, Gusto) --> tipo_deporte(Tipo), gustos_deporte(Gusto).
 tipo_deporte(gustar_deporte) --> [jugar].
-gustos_deporte(Deporte) --> [Deporte], {deporte(Deporte)}
+gustos_deporte(Deporte) --> [Deporte], {deporte(Deporte)}.
 
 gustos(Tipo, Gusto) --> tipo_comida(Tipo), gustos_comida(Gusto).
 tipo_comida(gustar_comida) --> [comer].
@@ -739,10 +740,6 @@ live_at('Duquesa Catalina','Buckingham Palace').
 live_at('Principe Luis','Buckingham Palace').
 live_at('Princesa Carlota','Buckingham Palace').
 live_at('Principe Jorge','Buckingham Palace').
-
-
-
-
 
 /* Clasificar ciudades en ciudades, provincias y países */
 landmark_from('Buckingham Palace', 'Londres').
