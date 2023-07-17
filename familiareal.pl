@@ -1,3 +1,248 @@
+
+:-initialization(main).
+main:- genealogical_base.
+
+genealogical_base:-
+    write('-------Base de datos Genealogica: Familia Real-------'),nl,nl,
+    write('Puedes formular preguntas como: '),nl,nl,
+    tab(2),write('1. Quienes son los padres de <nombre>?'),nl,
+    tab(2),write('2. Quienes son los abuelos de <nombre>?'),nl,
+    tab(2),write('3. Quien es la madre de <nombre>?'),nl,
+    tab(2),write('4. Quien es el padre de <nombre>?'),nl,
+    tab(2),write('5. Quien es la abuela de <nombre>?'),nl,
+    tab(2),write('6. Quien es el abuelo de <nombre>?'),nl,
+    tab(2),write('7. Quien es la madre de <nombre>?'),nl,
+    tab(2),write('9. <nombre> vive ?'),nl,
+    tab(2),write('10. Quien es hermano de <nombre>?'),nl,
+    tab(2),write('11. Quien es hermana de <nombre>?'),nl,
+    tab(2),write('12. Quienes son los ancestros de <nombre>?'),nl,
+    tab(2),write('13. Quien es la esposa de <nombre>?'),nl,
+    tab(2),write('14. Quien es tio de <nombre>?'),nl,
+    tab(2),write('Que deportes le gustan a <nombre>?'),nl,
+    tab(2),write('Que comidas le gustan a <nombre>?'),nl,
+    tab(2),write(' Que mascota tiene <nombre>?'),nl,
+    tab(2),write(' Quiénes viven en qué ciudad?'),nl,
+    tab(2),write(' Quiénes viven en qué país?'),nl,
+    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y deporte?'),nl,
+    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y comida?'),nl,
+    %tab(2),write(' ¿Quiénes que viven en X país, tienen Y mascota?'),nl,
+    %tab(2),write(' ¿A qué abuelo de X, le gusta Y comida?'),nl,
+    %tab(2),write(' ¿Qué abuelo de X, vive en qué ciudad?'),nl,
+    %tab(2),write(' ¿Quiénes que tienen X mascotas, les gusta Y comida?'),nl,
+    %tab(2),write(' ¿Qué abuelo de X, no vive?'),nl,
+    write('Para salir <salir>'),nl,
+    loop.
+
+salir:-
+  write('Bye!').
+
+loop:-
+    repeat,
+    obtener_comando(X),
+    accion(X),
+    (X == salir).
+
+
+
+accion(parent(X)):- parent(X),!.
+accion(mother(X)):- mother(X),!.
+accion(father(X)):- father(X),!.
+accion(grandparent(X)):- grandparent(X),!.
+accion(grandmother(X)):- grandmother(X),!.
+accion(grandfather(X)):- grandfather(X),!.
+accion(haschild(X)):- haschild(X),!.
+accion(sister(X)):- sister(X),!.
+accion(brother(X)):- brother(X),!.
+accion(wife(X)):- wife(X),!.
+accion(uncle(X)):- uncle(X),!.
+accion(predecessor(X)):- predecessor(X),!.
+accion(likes_sport(X)):-likes_sport(X),!.
+accion(likes_food(X)):-likes_food(X),!.
+accion(has_pet(X)):-has_pet(X),!.
+accion(live_at(X)):-live_at(X),!.
+accion(residents_in_city(X)):-residents_in_city(X),!.
+accion(residents_in_country(X)):-residents_in_country(X),!.
+%accion(who_sport(X)):-who_sport(X),!.
+%accion(who_food(X)):-who_food(X),!.
+%accion(who_pet(X)):-who_pet(X),!.
+%accion(who_gparent(X)):-who_gparent(X),!.
+%accion(who_gparent_liveat(X)):-who_gparent_liveat(X),!.
+%accion(who_petowner_likesfood(X)):-who_petowner_likesfood(X),!.
+%accion(who_gparent_nalive(X)):-who_gparent_nalive(X),!.
+
+accion(salir):- salir,!.
+
+obtener_comando(C):-
+    leer_lista(L),        
+    comando(X,L,[]),
+    C =.. X,!.
+
+obtener_comando(_):-
+    responder(['Reformula la pregunta.']),fail.
+
+responder([]):-
+    nl.
+responder([H|T]):-
+  write(H),
+  responder(T).
+
+write_list([]).
+write_list([A|B]):-
+    tab(2),write(A),nl,
+    write_list(B).
+
+comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
+comando([Relacion,Persona]) --> pregunta, es, art, relacion(Relacion), de, nombre(Persona).
+comando([Relacion,Persona]) --> pregunta, es, relacion(Relacion), de, nombre(Persona).
+%comando([Tipo, Persona, Gusto]) --> a, que, pariente, de, nombre(Persona), art, gusta, gustos(Tipo, Gusto).
+comando([Gusto]) --> que, deportes, art, gustan, a, nombre(Persona).
+comando([Gusto]) --> que, comidas, art, gustan, a, nombre(Persona).
+comando([Relacion,Persona])--> que, mascota, tener, nombre(Persona).
+comando()--> pregunta, viven, en, nombre(Ciudad)
+comando()--> pregunta, viven, en, nombre(Pais)
+
+%comando([Relacion, Persona]) --> pregunta, son, art, pariente, vivir(Relacion), que, tener, nombre(Persona).
+
+
+
+    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y deporte?'),nl,
+    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y comida?'),nl,
+    %tab(2),write(' ¿Quiénes que viven en X país, tienen Y mascota?'),nl,
+    %tab(2),write(' ¿A qué abuelo de X, le gusta Y comida?'),nl,
+    %tab(2),write(' ¿Qué abuelo de X, vive en qué ciudad?'),nl,
+    %tab(2),write(' ¿Quiénes que tienen X mascotas, les gusta Y comida?'),nl,
+    %tab(2),write(' ¿Qué abuelo de X, no vive?'),nl,
+
+
+comando([Salir]) --> relacion(Salir).
+
+
+mascota-->[mascotas].
+pregunta --> [quienes].
+pregunta --> [cuales].
+pariente --> [parientes].
+pariente --> [familia].
+pariente --> [familiares].
+vivos --> [vivos].
+vive --> [vive].
+son --> [son].
+art --> [los].
+art --> [las].
+art --> [el].
+art --> [la].
+art --> [le].
+de --> [de].
+de --> [del].
+juegan --> [juegan].
+gusta --> [gusta].
+a --> [a].
+que --> [que].
+mas --> [mas].
+vivir(vivos) --> [vivos].
+vivir(vivos) --> [vivo].
+tener --> [tiene].
+tener --> [tienen].
+en-->[en].
+
+relacion(parent) --> [parent].
+relacion(mother) --> [mother].
+relacion(grandparent) --> [grandparent].
+relacion(grandfather) --> [grandfather].
+relacion(grandmother) --> [grandmother].
+relacion(sister) --> [sister].
+relacion(brother) --> [brother].
+relacion(wife) --> [wife].
+relacion(uncle) --> [uncle].
+
+relacion(salir) --> [salir].
+
+gustos(Tipo, Gusto) --> tipo_deporte(Tipo), gustos_deporte(Gusto).
+tipo_deporte(gustar_deporte) --> [jugar].
+gustos_deporte(Deporte) --> [Deporte], {deporte(Deporte)}
+
+gustos(Tipo, Gusto) --> tipo_comida(Tipo), gustos_comida(Gusto).
+tipo_comida(gustar_comida) --> [comer].
+gustos_comida(Comida) --> [Comida], {comida(Comida)}.
+
+gustos(Tipo, Gusto) --> tipo_mascota(Tipo), gustos_mascota(Gusto).
+gustos_mascota(Mascota) --> [Mascota], {mascota(Mascota)}.
+
+
+nombre(Persona) --> [Persona], {persona(Persona)}.
+
+
+leer_lista(L):-
+  write('> '),
+  read_word_list(L).
+
+read_word_list([W|Ws]) :-
+    get0(C),
+    readword(C, W, C1),         % Read word starting with C, C1 is first new
+    restsent(C1, Ws), !.        % character - use it to get rest of sentence
+
+restsent(C,[]) :- 
+    lastword(C), 
+    !.                          % Nothing left if hit last-word marker
+restsent(C,[W1|Ws]) :-
+    readword(C,W1,C1),          % Else read next word and rest of sentence
+    restsent(C1,Ws).
+
+readword(C,W,C1) :-             % Some words are single characters
+    single_char(C),             % i.e. punctuation
+    !, 
+    name(W, [C]),               % get as an atom
+    get0(C1).
+readword(C, W, C1) :-
+    is_num(C),                  % if we have a number --
+    !,
+    number_word(C, W, C1, _).   % convert it to a genuine number
+readword(C,W,C2) :-             % otherwise if character does not
+    in_word(C, NewC),           % delineate end of word - keep
+    get0(C1),                   % accumulating them until 
+    restword(C1,Cs,C2),         % we have all the word     
+    name(W, [NewC|Cs]).         % then make it an atom
+readword(_,W,C2) :-             % otherwise
+    get0(C1),       
+    readword(C1,W,C2).        % start a new word
+
+restword(C, [NewC|Cs], C2) :-
+    in_word(C, NewC),
+    get0(C1),
+    restword(C1, Cs, C2).
+restword(C, [], C).
+
+single_char(0',).
+single_char(0';).
+single_char(0':).
+single_char(0'?).
+single_char(0'!).
+single_char(0'.).
+
+in_word(C, C) :- C >= 0'a, C =< 0'z.
+in_word(C, L) :- C >= 0'A, C =< 0'Z, L is C + 32.
+in_word(0'',0'').
+in_word(0'-,0'-).
+
+number_word(C, W, C1, Pow10) :- 
+    is_num(C),
+    !,
+    get0(C2),
+    number_word(C2, W1, C1, P10),
+    Pow10 is P10 * 10,
+    W is integer(((C - 0'0) * Pow10) + W1).
+number_word(C, 0, C, 0.1).
+
+is_num(C) :-
+    C =< 0'9,
+    C >= 0'0.
+
+lastword(10). 
+lastword(0'.).
+lastword(0'?).
+
+
+
+
 /*Comida*/
 /*food(english_food).*/
 food(['fish_and_chips', 'roast_beef', 'full_english_breakfast', 'shepherds_pie', 'yorkshire_pudding', 'bangers_and_mash', 'black_pudding','ploughmans_lunch', 'chicken_tikka_masala', 'waffles']).
@@ -365,6 +610,7 @@ likes_food('Duque Harry', black_pudding).
 
 
 
+
 /* ***********************************Mascotas *********************************/
 /*Qué mascota tiene x?*/
 has_pet('Lady Louise', dog).
@@ -445,6 +691,8 @@ cities(['Londres', 'Praga', 'Milan', 'Paris', 'Bruselas', 'Roma', 'Montecarlo', 
 country(['Inglaterra', 'Republica_Checa', 'Italia', 'Francia', 'Belgica', 'Monaco', 'Polonia']).*/
 
 
+
+
 live_at('Rey Carlos III','Buckingham Palace').
 live_at('Camila','Buckingham Palace').
 
@@ -493,6 +741,9 @@ live_at('Princesa Carlota','Buckingham Palace').
 live_at('Principe Jorge','Buckingham Palace').
 
 
+
+
+
 /* Clasificar ciudades en ciudades, provincias y países */
 landmark_from('Buckingham Palace', 'Londres').
 landmark_from('Castillo de Praga','Praga').
@@ -513,6 +764,7 @@ city_from('Roma', 'Italia').
 city_from('Montecarlo','Monaco').
 city_from('Cracovia', 'Polonia').
 city_from('Genovia', 'Italia').
+
 
 /* Quiénes viven en qué ciudad? */
 residents_in_city(City, People) :-
@@ -546,12 +798,15 @@ who_gparent(Person,Lfood,Grandparent) :-
   
 /*¿Qué abuelo de X, vive en qué ciudad?*/
 who_gparent_liveat(Person,Lcity,Grandparent) :-
-    residents_in_city(Lcity,Person),
-    grandparent(Grandparent,Person).
-    
+    grandparent(Grandparent,Person),
+    residents_in_city(City,Person).
 
 /*¿Quiénes que tienen X mascotas, les gusta Y comida?*/
-who_petowner_likesfood(Food,Hpet,People) :-
-    likes_food(People,Food),
+who_petowner_likesfood(Country,Hpet,People) :-
+    likes_food(People,food),
     has_pet(People,Hpet).
 
+/*¿Qué abuelo de X, no vive?*/
+who_gparent_nalive(Person,Grandparent) :-
+    grandparent(Grandparent,Person),
+    dead(Person).
