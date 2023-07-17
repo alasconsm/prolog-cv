@@ -94,6 +94,7 @@ write_list([A|B]):-
 comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion,Persona]) --> pregunta, es, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion,Persona]) --> pregunta, es, relacion(Relacion), de, nombre(Persona).
+comando([Relacion,Persona]) --> pregunta, son, relacion(Relacion),art, de, nombre(Persona).
 %comando([Tipo, Persona, Gusto]) --> a, que, pariente, de, nombre(Persona), art, gusta, gustos(Tipo, Gusto).
 comando([Gusto]) --> que, deportes, art, gustan, a, nombre(Persona).
 comando([Gusto]) --> que, comidas, art, gustan, a, nombre(Persona).
