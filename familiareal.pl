@@ -6,7 +6,7 @@ genealogical_base:-
     write('-------Base de datos Genealogica: Familia Real-------'),nl,nl,
     write('Puedes formular preguntas como: '),nl,nl,
     tab(2),write('1. Quienes son los padres de <nombre>?'),nl,
-    tab(2),write('2. Quienes son los abuelos de <nombre>?'),nl,
+    tab(2),write('2. Quien es el abuelo de <nombre>?'),nl,
     tab(2),write('3. Quien es la madre de <nombre>?'),nl,
     tab(2),write('4. Quien es el padre de <nombre>?'),nl,
     tab(2),write('5. Quien es la abuela de <nombre>?'),nl,
@@ -44,24 +44,27 @@ loop:-
 
 
 
-accion(parent(X)):- parent(X),!.
-accion(mother(X)):- mother(X),!.
-accion(father(X)):- father(X),!.
-accion(grandparent(X)):- grandparent(X),!.
-accion(grandmother(X)):- grandmother(X),!.
-accion(grandfather(X)):- grandfather(X),!.
+accion(parent(X, Y)):- parent(X, Y),!.
+accion(mother(X, Y)):- mother(X, Y),!.
+accion(father(X, Y)):- father(X, Y),!.
+
+accion(hijos(X)):- hijos(X),!.
+
+accion(grandparent(X, Z)):- grandparent(X, Z),!.
+accion(grandmother(X, Z)):- grandmother(X, Z),!.
+accion(grandfather(X, Z)):- grandfather(X, Z),!.
 accion(haschild(X)):- haschild(X),!.
-accion(sister(X)):- sister(X),!.
-accion(brother(X)):- brother(X),!.
-accion(wife(X)):- wife(X),!.
-accion(uncle(X)):- uncle(X),!.
-accion(predecessor(X)):- predecessor(X),!.
-accion(likes_sport(X)):-likes_sport(X),!.
-accion(likes_food(X)):-likes_food(X),!.
-accion(has_pet(X)):-has_pet(X),!.
-accion(live_at(X)):-live_at(X),!.
-accion(residents_in_city(X)):-residents_in_city(X),!.
-accion(residents_in_country(X)):-residents_in_country(X),!.
+accion(sister(X, Y)):- sister(X, Y),!.
+accion(brother(X, Y)):- brother(X, Y),!.
+accion(wife(X, Y)):- wife(X, Y),!.
+accion(uncle(X, Z)):- uncle(X, Z),!.
+accion(predecessor(X, Z)):- predecessor(X, Z),!.
+accion(likes_sport(X, Y)):-likes_sport(X, Y),!.
+accion(likes_food(X, Y)):-likes_food(X, Y),!.
+accion(has_pet(X, Y)):-has_pet(X, Y),!.
+accion(live_at(X, Y)):-live_at(X, Y),!.
+accion(residents_in_city(City, People)):-residents_in_city(City,People),!.
+accion(residents_in_country(Country,People)):-residents_in_country(Country,People),!.
 %accion(who_sport(X)):-who_sport(X),!.
 %accion(who_food(X)):-who_food(X),!.
 %accion(who_pet(X)):-who_pet(X),!.
@@ -91,6 +94,23 @@ write_list([A|B]):-
     tab(2),write(A),nl,
     write_list(B).
 
+
+    /* tab(2),write('6. Quien es el abuelo de <nombre>?'),nl,
+    tab(2),write('7. Quien es la madre de <nombre>?'),nl,
+    tab(2),write('9. <nombre> vive ?'),nl,
+    tab(2),write('10. Quien es hermano de <nombre>?'),nl,
+    tab(2),write('11. Quien es hermana de <nombre>?'),nl,
+    tab(2),write('12. Quienes son los ancestros de <nombre>?'),nl,
+    tab(2),write('13. Quien es la esposa de <nombre>?'),nl,
+    tab(2),write('14. Quien es tio de <nombre>?'),nl,
+    tab(2),write('Que deportes le gustan a <nombre>?'),nl,
+    tab(2),write('Que comidas le gustan a <nombre>?'),nl,
+    tab(2),write(' Que mascota tiene <nombre>?'),nl,
+    tab(2),write(' Quiénes viven en qué ciudad?'),nl,
+    tab(2),write(' Quiénes viven en qué país?'),nl, */
+    
+comando([Relacion,Persona])--> es,nombre(Persona),padre, de, nombre(Persona).
+comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion,Persona]) --> pregunta, es, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion,Persona]) --> pregunta, es, relacion(Relacion), de, nombre(Persona).
@@ -102,25 +122,13 @@ comando([Relacion,Persona])--> que, mascota, tener, nombre(Persona).
 comando()--> pregunta, viven, en, nombre(Ciudad).
 comando()--> pregunta, viven, en, nombre(Pais).
 
-
 %comando([Relacion, Persona]) --> pregunta, son, art, pariente, vivir(Relacion), que, tener, nombre(Persona).
-
-
-
-    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y deporte?'),nl,
-    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y comida?'),nl,
-    %tab(2),write(' ¿Quiénes que viven en X país, tienen Y mascota?'),nl,
-    %tab(2),write(' ¿A qué abuelo de X, le gusta Y comida?'),nl,
-    %tab(2),write(' ¿Qué abuelo de X, vive en qué ciudad?'),nl,
-    %tab(2),write(' ¿Quiénes que tienen X mascotas, les gusta Y comida?'),nl,
-    %tab(2),write(' ¿Qué abuelo de X, no vive?'),nl,
-
-
 comando([Salir]) --> relacion(Salir).
 
 
 mascota-->[mascotas].
 pregunta --> [quienes].
+pregunta --> [quien].
 pregunta --> [cuales].
 pariente --> [parientes].
 pariente --> [familia].
@@ -145,16 +153,18 @@ vivir(vivos) --> [vivo].
 tener --> [tiene].
 tener --> [tienen].
 en-->[en].
+es-->[es].
 
-relacion(parent) --> [parent].
-relacion(mother) --> [mother].
-relacion(grandparent) --> [grandparent].
-relacion(grandfather) --> [grandfather].
-relacion(grandmother) --> [grandmother].
-relacion(sister) --> [sister].
-relacion(brother) --> [brother].
-relacion(wife) --> [wife].
-relacion(uncle) --> [uncle].
+relacion(father) --> [padre].
+relacion(mother) --> [madre].
+relacion(grandparent) --> [abuelos].
+relacion(grandfather) --> [abuelo].
+relacion(grandmother) --> [abuela].
+relacion(sister) --> [hermana].
+relacion(brother) --> [hermano].
+relacion(wife) --> [esposa].
+relacion(uncle) --> [tio].
+relacion(hijos)--> [hijos]
 
 relacion(salir) --> [salir].
 
@@ -225,7 +235,7 @@ in_word(C, L) :- C >= 0'A, C =< 0'Z, L is C + 32.
 in_word(0'',0'').
 in_word(0'-,0'-).
 
-number_word(C, W, C1, Pow10) :- 
+/* number_word(C, W, C1, Pow10) :- 
     is_num(C),
     !,
     get0(C2),
@@ -233,6 +243,7 @@ number_word(C, W, C1, Pow10) :-
     Pow10 is P10 * 10,
     W is integer(((C - 0'0) * Pow10) + W1).
 number_word(C, 0, C, 0.1).
+ */
 
 is_num(C) :-
     C =< 0'9,
@@ -286,13 +297,18 @@ male('Principe Andres').
 male('Principe Eduardo').
 male('Principe Jorge').
 male('Principe Luis').
-male('Principe Archie').
+male('Archie').
 male('Peter Phillips').
 male('Lucas Tindall').
 male('Vizconde James').
 male('August Philip').
 male('Principe William').
-male('Duque Harry').
+male('Harry').
+
+
+persona(Persona):-
+    female(Persona);
+    male(Persona).
 
 /*Padres*/
 parent('Isabel II','Rey Carlos III').
@@ -305,17 +321,17 @@ parent('Isabel II','Principe Eduardo').
 parent('Felipe','Principe Eduardo').
 parent('Princesa Diana','Principe William').
 parent('Rey Carlos III','Principe William').
-parent('Princesa Diana','Duque Harry').
-parent('Rey Carlos III','Duque Harry').
+parent('Princesa Diana','Harry').
+parent('Rey Carlos III','Harry').
 parent('Principe William','Principe Jorge').
 parent('Duquesa Catalina','Principe Jorge').
 parent('Principe William','Princesa Carlota').
 parent('Duquesa Catalina','Princesa Carlota').
 parent('Principe William','Principe Luis').
 parent('Duquesa Catalina','Principe Luis').
-parent('Duque Harry','Principe Archie').
-parent('Duquesa Meghan','Principe Archie').
-parent('Duque Harry','Princesa Lilibet').
+parent('Harry','Archie').
+parent('Duquesa Meghan','Archie').
+parent('Harry','Princesa Lilibet').
 parent('Duquesa Meghan','Princesa Lilibet').
 parent('Princesa Ana','Zara Phillips').
 parent('Mark Phillips','Zara Phillips').
@@ -345,6 +361,19 @@ parent('Principe Eduardo','Vizconde James').
 parent('Condesa Sofia','Vizconde James').
 
 
+hijos(Padre):-
+    (hijos_msg(Padre);
+    tab(2),
+    responder([Padre,' no tiene hijos registrados.']),
+    fail
+    ).
+
+hijos_msg(Padre):-
+    setof(Persona, father(Padre, Persona), Lista),
+    responder(['Los hijos de ', Padre, ' son:']),
+    write_list(Lista).
+
+    
 /**************************************Funciones de Relación***********************************/
 /*Quien es la mama o papa de Y*/
 /*Quien es el hijo hija de X*/
@@ -477,8 +506,8 @@ likes_sport('Principe Jorge', basketball).
 likes_sport('Principe Luis', swimming).
 likes_sport('Principe Luis', cricket).
 
-likes_sport('Principe Archie', rugby).
-likes_sport('Principe Archie', football).
+likes_sport('Archie', rugby).
+likes_sport('Archie', football).
 
 likes_sport('Peter Phillips', rugby).
 likes_sport('Peter Phillips', cricket).
@@ -495,8 +524,8 @@ likes_sport('August Philip', tennis).
 likes_sport('Principe William', football).
 likes_sport('Principe William', basketball).
 
-likes_sport('Duque Harry', rugby).
-likes_sport('Duque Harry', polo).
+likes_sport('Harry', rugby).
+likes_sport('Harry', polo).
 
 
 /************************************* Gustos de comida ***************************************/
@@ -582,9 +611,9 @@ likes_food('Principe Luis', roast_beef).
 likes_food('Principe Luis', full_english_breakfast).
 likes_food('Principe Luis', ploughmans_lunch).
 
-likes_food('Principe Archie', fish_and_chips).
-likes_food('Principe Archie', waffles).
-likes_food('Principe Archie', black_pudding).
+likes_food('Archie', fish_and_chips).
+likes_food('Archie', waffles).
+likes_food('Archie', black_pudding).
 
 likes_food('Peter Phillips', roast_beef).
 likes_food('Peter Phillips', shepherds_pie).
@@ -606,9 +635,9 @@ likes_food('Principe William', roast_beef).
 likes_food('Principe William', yorkshire_pudding).
 likes_food('Principe William', bangers_and_mash).
 
-likes_food('Duque Harry', fish_and_chips).
-likes_food('Duque Harry', ploughmans_lunch).
-likes_food('Duque Harry', black_pudding).
+likes_food('Harry', fish_and_chips).
+likes_food('Harry', ploughmans_lunch).
+likes_food('Harry', black_pudding).
 
 
 
@@ -668,8 +697,8 @@ has_pet('Principe Jorge', cat).
 
 has_pet('Principe Luis', dog).
 
-has_pet('Principe Archie', dog).
-has_pet('Principe Archie', rabbit).
+has_pet('Archie', dog).
+has_pet('Archie', rabbit).
 
 has_pet('Peter Phillips', dog).
 
@@ -682,8 +711,8 @@ has_pet('August Philip', dog).
 has_pet('Principe William', dog).
 has_pet('Principe William', cat).
 
-has_pet('Duque Harry', dog).
-has_pet('Duque Harry', rabbit).
+has_pet('Harry', dog).
+has_pet('Harry', rabbit).
 
 
 /**************VIVIENDA********************/
@@ -731,8 +760,8 @@ live_at('Autumn Kelly','Castel Sant-Angelo').
 live_at('Isla Phillips','Castel Sant-Angelo').
 live_at('Savannah Phillips','Castel Sant-Angelo').
 
-live_at('Duque Harry','Zamel Wawel').
-live_at('Principe Archie','Zamel Wawel').
+live_at('Harry','Zamel Wawel').
+live_at('Archie','Zamel Wawel').
 live_at('Duquesa Meghan','Zamel Wawel').
 live_at('Princesa Lilibet','Zamel Wawel').
 
@@ -808,3 +837,5 @@ who_petowner_likesfood(Country,Hpet,People) :-
 who_gparent_nalive(Person,Grandparent) :-
     grandparent(Grandparent,Person),
     dead(Person).
+
+    
