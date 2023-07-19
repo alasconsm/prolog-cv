@@ -5,14 +5,17 @@ genealogical_base:-
     write('-------Base de datos Genealogica: Familia Real-------'),nl,nl,
     write('Puedes formular preguntas como: '),nl,nl,
     tab(2),write('1. quien es el padre de <nombre>?'),nl,
-    tab(2),write('2. quien es el abuelo de <nombre>?'),nl,
-    tab(2),write('3. quien es la madre de <nombre>?'),nl,
+    tab(2),write('2. quien es la madre de <nombre>?'),nl,
+    tab(2),write('3. quien es el abuelo de <nombre>?'),nl,
     tab(2),write('4. quien es la abuela de <nombre>?'),nl,
-    tab(2),write('5. quien es el abuelo de <nombre>?'),nl,
-    tab(2),write('7. quien es la madre de <nombre>?'),nl,
-    tab(2),write('9. <nombre> vive ?'),nl,
-    tab(2),write('10. quien es hermano de <nombre>?'),nl,
-    tab(2),write('11. quien es hermana de <nombre>?'),nl,
+    tab(2),write('5. quien es el hermano de <nombre>?'),nl,
+    tab(2),write('6. quien es hermana de <nombre>?'),nl,
+    tab(2),write('7. quien es el esposo de <nombre>?'),nl,
+    tab(2),write('8. quien es la esposa de <nombre>?'),nl,
+    tab(2),write('9. quien es el tio de <nombre>?'),nl,
+    tab(2),write('10. quienes son los predecesores de <nombre>?'),nl,
+    tab(2),write('10. que deportes les gusta a <nombre>?'),nl,
+
     tab(2),write('12. quienes son los ancestros de <nombre>?'),nl,
     tab(2),write('13. quien es la esposa de <nombre>?'),nl,
     tab(2),write('14. quien es tio de <nombre>?'),nl,
@@ -45,6 +48,16 @@ accion(is_grandFather(X)):- is_grandFather(X),!.
 accion(is_grandMother(X)):- is_grandMother(X),!.
 accion(is_Father(X)):- is_Father(X),!.
 accion(is_Mother(X)):- is_Mother(X),!.
+accion(is_Brother(X)):- is_Brother(X),!.
+accion(is_Sister(X)):- is_Sister(X),!.
+accion(is_Husband(X)):- is_Husband(X),!.
+accion(is_Wife(X)):- is_Wife(X),!.
+accion(is_Uncle(X)):- is_Uncle(X),!.
+accion(is_Predecessor(X)):- is_Predecessor(X),!.
+accion(is_Descendant(X)):- is_Descendant(X),!.
+accion(is_Likes_Sport(X)):- is_Likes_Sport(X),!.
+accion(is_Sport(X)):- is_Sport(X),!.
+
 
 accion(salir):- salir,!.
 
@@ -68,23 +81,13 @@ write_list([A|B]):-
     write_list(B).
 
 
-    /* tab(2),write('6. quien es el abuelo de <nombre>?'),nl,
-    tab(2),write('7. quien es la madre de <nombre>?'),nl,
-    tab(2),write('9. <nombre> vive ?'),nl,
-    tab(2),write('10. quien es hermano de <nombre>?'),nl,
-    tab(2),write('11. quien es hermana de <nombre>?'),nl,
-    tab(2),write('12. quienes son los ancestros de <nombre>?'),nl,
-    tab(2),write('13. quien es la esposa de <nombre>?'),nl,
-    tab(2),write('14. quien es tio de <nombre>?'),nl,
-    tab(2),write('Que deportes le gustan a <nombre>?'),nl,
-    tab(2),write('Que comidas le gustan a <nombre>?'),nl,
-    tab(2),write(' Que mascota tiene <nombre>?'),nl,
-    tab(2),write(' Quiénes viven en qué ciudad?'),nl,
-    tab(2),write(' Quiénes viven en qué país?'),nl, */
-
 comando([Relacion, Persona])--> pregunta, es, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion, Persona])--> pregunta, son, art, relacion(Relacion), de, art, nombre(Persona).
+comando([Relacion, Persona])--> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion, Persona])--> pregunta, es, art, relacion(Relacion), de, art, nombre(Persona).
+comando([Deporte, Persona])--> pregunta, deporte(Deporte), art, gusta, art, nombre(Persona).
+comando([Deporte])--> prep, pregunta, art, gusta, art, deporte(Deporte).
+comando([Deporte])--> prep, pregunta, art, gusta, deporte(Deporte).
 comando([Salir]) --> relacion(salir).
 
 %comando([Relacion,Persona])--> es,nombre(Persona),padre, de, nombre(Persona).
@@ -107,6 +110,7 @@ mascota-->[mascotas].
 pregunta --> [quienes].
 pregunta --> [quien].
 pregunta --> [cuales].
+pregunta --> [que].
 pariente --> [parientes].
 pariente --> [familia].
 pariente --> [familiares].
@@ -114,15 +118,18 @@ vivos --> [vivos].
 vive --> [vive].
 son --> [son].
 art --> [los].
+prep --> [a].
 art --> [las].
 art --> [el].
 art --> [la].
+art --> [le].
+art --> [les].
 de --> [de].
 de --> [del].
 juegan --> [juegan].
 gusta --> [gusta].
+gusta --> [gustan].
 a --> [a].
-que --> [que].
 mas --> [mas].
 vivir(vivos) --> [vivos].
 vivir(vivos) --> [vivo].
@@ -132,16 +139,36 @@ en-->[en].
 es-->[es].
 
 relacion(is_Father) --> [padre].
+relacion(is_Father) --> [papa].
 relacion(is_Mother) --> [madre].
+relacion(is_Mother) --> [mama].
 relacion(is_grandFather) --> [abuelos].
 relacion(is_grandFather) --> [abuelo].
 relacion(is_grandMother) --> [abuelas].
 relacion(is_grandMother) --> [abuela].
-relacion(sister) --> [hermana].
-relacion(brother) --> [hermano].
-relacion(wife) --> [esposa].
-relacion(uncle) --> [tio].
-relacion(hijos)--> [hijos].
+relacion(is_Sister) --> [hermana].
+relacion(is_Brother) --> [hermano].
+relacion(is_Wife) --> [esposa].
+relacion(is_Husband) --> [esposo].
+relacion(is_Uncle) --> [tio].
+relacion(is_Predecessor) --> [precedesores].
+relacion(is_Descendant) --> [descendientes].
+
+deporte(is_Likes_Sport) --> [deporte].
+deporte(is_Likes_Sport) --> [deportes].
+deporte(is_Sport) --> [football].
+deporte(is_Sport) --> [cricket].
+deporte(is_Sport) --> [tennis].
+deporte(is_Sport) --> [rugby].
+deporte(is_Sport) --> [golf].
+deporte(is_Sport) --> [basketball].
+deporte(is_Sport) --> [swimming].
+deporte(is_Sport) --> [horse_riding].
+deporte(is_Sport) --> [boxing].
+deporte(is_Sport) --> [volleyball].
+deporte(is_Sport) --> [ballet].
+
+
 relacion(salir) --> [adios].
 relacion(salir) --> [bye].
 relacion(salir) --> [exit].
@@ -237,7 +264,7 @@ lastword(0'?).
 
 /*Comida*/
 /*food(english_food).*/
-food([fish_and_chips),roast_beef, full_english_breakfast, shepherds_pie, yorkshire_pudding, bangers_and_mash, black_pudding,ploughmans_lunch, chicken_tikka_masala, waffles]).
+food([fish_and_chips,roast_beef, full_english_breakfast, shepherds_pie, yorkshire_pudding, bangers_and_mash, black_pudding,ploughmans_lunch, chicken_tikka_masala, waffles]).
 
 /*sports*/
 /*sports(sports_list).*/
@@ -819,7 +846,7 @@ who_gparent_nalive(Person,Grandparent) :-
     grandparent(Grandparent,Person),
     dead(Person).
 
-
+/*#####################################################################################################*/
 is_grandFather(Person):-
     grandfather(X, Person),
     write(X),nl.
@@ -834,4 +861,40 @@ is_Father(Person):-
 
 is_Mother(Person):-
     mother(X, Person),
+    write(X),nl.
+
+is_Brother(Person):-
+    brother(X,Person),
+    write(X),nl.
+
+is_Sister(Person):-
+    sister(X,Person),
+    write(X),nl.
+
+is_Husband(Person):-
+    wife(Person,X),
+    write(X),nl.
+
+is_Wife(Person):-
+    wife(X,Person),
+    write(X),nl.
+
+is_Uncle(Person):-
+    uncle(X,Person),
+    write(X),nl.
+
+is_Predecessor(Person):-
+    predecessor(X,Person),
+    write(X),nl.
+
+is_Descendant(Person):-
+    predecessor(Person,X),
+    write(X),nl.
+
+is_Likes_Sport(Person):-
+    likes_sport(Person, X),
+    write(X),nl.
+
+is_Sport(Sport):-
+    likes_sport(X, Sport),
     write(X),nl.
