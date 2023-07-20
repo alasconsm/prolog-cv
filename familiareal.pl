@@ -14,24 +14,11 @@ genealogical_base:-
     tab(2),write('8. quien es la esposa de <nombre>?'),nl,
     tab(2),write('9. quien es el tio de <nombre>?'),nl,
     tab(2),write('10. quienes son los predecesores de <nombre>?'),nl,
-    tab(2),write('10. que deportes les gusta a <nombre>?'),nl,
+    tab(2),write('11. que deporte le gustan a <nombre>?'),nl,
+    tab(2),write('12. que comida le gustan a <nombre>?'),nl,
+    tab(2),write('13. que mascota tiene <nombre>?'),nl,
 
-    tab(2),write('12. quienes son los ancestros de <nombre>?'),nl,
-    tab(2),write('13. quien es la esposa de <nombre>?'),nl,
-    tab(2),write('14. quien es tio de <nombre>?'),nl,
-    tab(2),write('Que deportes le gustan a <nombre>?'),nl,
-    tab(2),write('Que comidas le gustan a <nombre>?'),nl,
-    tab(2),write(' Que mascota tiene <nombre>?'),nl,
-    tab(2),write(' Quiénes viven en qué ciudad?'),nl,
-    tab(2),write(' Quiénes viven en qué país?'),nl,
-    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y deporte?'),nl,
-    %tab(2),write(' ¿Quiénes que viven en X país, les gusta Y comida?'),nl,
-    %tab(2),write(' ¿Quiénes que viven en X país, tienen Y mascota?'),nl,
-    %tab(2),write(' ¿A qué abuelo de X, le gusta Y comida?'),nl,
-    %tab(2),write(' ¿Qué abuelo de X, vive en qué ciudad?'),nl,
-    %tab(2),write(' ¿Quiénes que tienen X mascotas, les gusta Y comida?'),nl,
-    %tab(2),write(' ¿Qué abuelo de X, no vive?'),nl,
-    write('Para salir <salir>'),nl,
+     write('Para salir <salir>'),nl,
     loop.
 
 salir:-
@@ -57,7 +44,9 @@ accion(is_Predecessor(X)):- is_Predecessor(X),!.
 accion(is_Descendant(X)):- is_Descendant(X),!.
 accion(is_Likes_Sport(X)):- is_Likes_Sport(X),!.
 accion(is_Sport(X)):- is_Sport(X),!.
-
+accion(is_Likes_Food(X)):- is_Likes_Food(X),!.
+accion(is_Has_Pet(X)):- is_Has_Pet(X),!.
+accion(is_live_at(X)):- is_live_at(X),!.
 
 accion(salir):- salir,!.
 
@@ -85,25 +74,13 @@ comando([Relacion, Persona])--> pregunta, es, art, relacion(Relacion), de, nombr
 comando([Relacion, Persona])--> pregunta, son, art, relacion(Relacion), de, art, nombre(Persona).
 comando([Relacion, Persona])--> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
 comando([Relacion, Persona])--> pregunta, es, art, relacion(Relacion), de, art, nombre(Persona).
-comando([Deporte, Persona])--> pregunta, deporte(Deporte), art, gusta, art, nombre(Persona).
-comando([Deporte])--> prep, pregunta, art, gusta, art, deporte(Deporte).
-comando([Deporte])--> prep, pregunta, art, gusta, deporte(Deporte).
+comando([Relacion, Persona])--> pregunta, relacion(Relacion), art, gusta, prep, nombre(Persona).
+comando([Relacion, Persona])--> pregunta, relacion(Relacion), tiene, nombre(Persona).
+comando([Relacion, Persona])--> en, pregunta, relacion(Relacion), vive, nombre(Persona).
+/*comando([Relacion, Comida])--> pregunta, pregunta, vive, en, relacion(Relacion), le, gusta, comida(Comida).*/
+
 comando([Salir]) --> relacion(salir).
 
-%comando([Relacion,Persona])--> es,nombre(Persona),padre, de, nombre(Persona).
-%comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
-%comando([Relacion,Persona]) --> pregunta, son, art, relacion(Relacion), de, nombre(Persona).
-%comando([Relacion,Persona]) --> pregunta, es, art, relacion(Relacion), de, nombre(Persona).
-%comando([Relacion,Persona]) --> pregunta, es, relacion(Relacion), de, nombre(Persona).
-%comando([Relacion,Persona]) --> pregunta, son, relacion(Relacion),art, de, nombre(Persona).
-%comando([Tipo, Persona, Gusto]) --> a, que, pariente, de, nombre(Persona), art, gusta, gustos(Tipo, Gusto).
-%comando([Gusto]) --> que, deportes, art, gustan, a, nombre(Persona).
-%comando([Gusto]) --> que, comidas, art, gustan, a, nombre(Persona).
-%comando([Relacion,Persona])--> que, mascota, tener, nombre(Persona).
-%comando()--> pregunta, viven, en, nombre(Ciudad).
-%comando()--> pregunta, viven, en, nombre(Pais).
-
-%comando([Relacion, Persona]) --> pregunta, son, art, pariente, vivir(Relacion), que, tener, nombre(Persona).
 
 
 mascota-->[mascotas].
@@ -129,6 +106,8 @@ de --> [del].
 juegan --> [juegan].
 gusta --> [gusta].
 gusta --> [gustan].
+tiene --> [tiene].
+tiene --> [tienen].
 a --> [a].
 mas --> [mas].
 vivir(vivos) --> [vivos].
@@ -154,25 +133,37 @@ relacion(is_Uncle) --> [tio].
 relacion(is_Predecessor) --> [precedesores].
 relacion(is_Descendant) --> [descendientes].
 
-deporte(is_Likes_Sport) --> [deporte].
-deporte(is_Likes_Sport) --> [deportes].
-deporte(is_Sport) --> [football].
-deporte(is_Sport) --> [cricket].
-deporte(is_Sport) --> [tennis].
-deporte(is_Sport) --> [rugby].
-deporte(is_Sport) --> [golf].
-deporte(is_Sport) --> [basketball].
-deporte(is_Sport) --> [swimming].
-deporte(is_Sport) --> [horse_riding].
-deporte(is_Sport) --> [boxing].
-deporte(is_Sport) --> [volleyball].
-deporte(is_Sport) --> [ballet].
+relacion(is_Likes_Sport) --> [deporte].
+relacion(is_Likes_Sport) --> [deportes].
+relacion(is_Likes_Food) --> [platillos].
+relacion(is_Likes_Food) --> [comida].
+relacion(is_Likes_Food) --> [comidas].
+relacion(is_Likes_Food) --> [platillo].
+relacion(is_Has_Pet) --> [mascota].
+relacion(is_Has_Pet) --> [mascotas].
+relacion(is_live_at) --> [castillo].
+relacion(is_live_at) --> [lugar].
+/*comida(who_sport)  --> [waffles].*/
+
+
+
+relacion(is_Sport) --> [football].
+relacion(is_Sport) --> [cricket].
+relacion(is_Sport) --> [tennis].
+relacion(is_Sport) --> [rugby].
+relacion(is_Sport) --> [golf].
+relacion(is_Sport) --> [basketball].
+relacion(is_Sport) --> [swimming].
+relacion(is_Sport) --> [horse_riding].
+relacion(is_Sport) --> [boxing].
+relacion(is_Sport) --> [volleyball].
+relacion(is_Sport) --> [ballet].
 
 
 relacion(salir) --> [adios].
 relacion(salir) --> [bye].
 relacion(salir) --> [exit].
-
+/*
 gustos(Tipo, Gusto) --> tipo_deporte(Tipo), gustos_deporte(Gusto).
 tipo_deporte(gustar_deporte) --> [jugar].
 gustos_deporte(Deporte) --> [Deporte], {deporte(Deporte)}.
@@ -182,7 +173,7 @@ tipo_comida(gustar_comida) --> [comer].
 gustos_comida(Comida) --> [Comida], {comida(Comida)}.
 
 gustos(Tipo, Gusto) --> tipo_mascota(Tipo), gustos_mascota(Gusto).
-gustos_mascota(Mascota) --> [Mascota], {mascota(Mascota)}.
+gustos_mascota(Mascota) --> [Mascota], {mascota(Mascota)}.*/
 
 
 nombre(Persona) --> [Persona], {persona(Persona)}.
@@ -268,7 +259,18 @@ food([fish_and_chips,roast_beef, full_english_breakfast, shepherds_pie, yorkshir
 
 /*sports*/
 /*sports(sports_list).*/
-sports([football, cricket,tennis, rugby, golf, basketball, swimming, horse_riding, boxing, volleyball, ballet]).
+/*sports([football, cricket,tennis, rugby, golf, basketball, swimming, horse_riding, boxing, volleyball, ballet]).*/
+sports(football).
+sports(cricket).
+sports(tennis).
+sports(rugby).
+sports(golf).
+sports(basketball).
+sports(swimming).
+sports(horse_riding).
+sports(boxing).
+sports(volleyball).
+sports(ballet).
 
 /*pets*/
 /*pets(pets_list).*/
@@ -814,7 +816,8 @@ residents_in_country(Country, People) :-
 /*¿Quiénes que viven en X país, les gusta Y deporte?*/
 who_sport(Country,Lsport,People) :-
     residents_in_country(Country, People),
-    likes_sport(People,Lsport).
+    likes_sport(People,Lsport),
+    write(People),nl.
 
 /*¿Quiénes que viven en X país, les gusta Y comida?*/
 who_food(Country,Lfood,People) :-
@@ -898,3 +901,16 @@ is_Likes_Sport(Person):-
 is_Sport(Sport):-
     likes_sport(X, Sport),
     write(X),nl.
+
+is_Likes_Food(Person):-
+    likes_food(Person, X),
+    write(X),nl.
+
+is_Has_Pet(Person):-
+    has_pet(Person, X),
+    write(X),nl.
+
+is_live_at(Person):-
+    live_at(Person, X),
+    write(X),nl.
+
